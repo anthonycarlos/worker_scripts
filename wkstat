@@ -1,0 +1,13 @@
+#!/bin/bash
+# wkstat - Worker Stat
+# Usage: wkstat ip_address ...
+
+# Give worker status (polling, working, sleeping, or sleep after current job)
+# of one or more workers.
+shared=/cygdrive/c/shared
+sleepfile=WORKER_SLEEP.txt
+heartbeatfile=HEARTBEAT.TXT
+for wkr in "$@"
+do
+  wkssh "$wkr -C if [ -e $shared/$heartbeatfile ]; then heartbeatfilecheck=1; else hearbeatfilecheck=0; fi && if [ -e $shared/$sleepfile ]; then sleepfilecheck=4; else sleepfilecheck=2; fi && let result=\$heartbeatfilecheck+\$sleepfilecheck && case \$result in 2 ) echo $wkr 'is polling.' ;; 3 ) echo $wkr 'is working.' ;; 4 ) echo $wkr 'is sleeping.' ;; 5 ) echo $wkr 'is set to sleep after this current job.' ;; esac"
+done

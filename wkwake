@@ -1,0 +1,11 @@
+#!/bin/bash
+# wkwake - Worker Wake
+# Usage: wkwake ip_address ...
+
+# Wake one or more workers.
+shared=/cygdrive/c/shared
+sleepfile=WORKER_SLEEP.txt
+for wkr in "$@"
+do
+  wkssh "$wkr -C ls -l $shared | grep $sleepfile && echo 'Wake up, '$wkr'!' && rm -f $shared/$sleepfile && ls -l $shared | grep $sleepfile"
+done

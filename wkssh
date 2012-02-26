@@ -1,0 +1,3 @@
+#!/bin/bash
+# wkssh - Worker SSH
+ssh -i ~/.aws/brianl/id_rsa -l $WORKER_USER -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $1

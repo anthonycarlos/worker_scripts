@@ -1,0 +1,25 @@
+#!/bin/bash
+# wkprep4ami - Worker Prep for AMI
+# Usage: wkprep4ami ip_address ...
+
+shared=/cygdrive/c/shared
+logdir=$shared/log
+birthdatefile=BIRTH_DATE.txt
+
+for wkr in "$@"
+do
+  # Clear out the worker.log file 
+  wkssh "$wkr -C echo 'Log cleared at: ' `date` > $logdir/worker.log && echo 'Worker log cleared.'"
+
+  # Clean up old janova-worker gems.
+  wkssh "$wkr -C gem.bat cleanup janova-worker && echo 'Old janova-gems removed.'"
+
+  # Remove WORKER_SLEEP.txt file.
+  wkwake $wkr
+
+  # Remove BIRTH_DATE.txt file.
+  wkssh "$wkr -C rm -f $shared/$birthdatefile && echo 'Birthdate file removed.'"
+
+  # Remove any janova-worker gems from C:\shared.
+  wkssh "$wkr -C rm -f $shared/janova-worker-*.gem && echo 'C:\shared cleared of janova-worker gems.'"
+done

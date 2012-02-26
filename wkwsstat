@@ -1,0 +1,9 @@
+#!/bin/bash
+# wkwsstat - Worker WorkerService Stat
+# Usage: wkwsstat ip_address ...
+
+for wkr in "$@"
+do
+  # Shows whether the WorkerService is running or not.
+  wkssh "$wkr -C sc query WorkerService"
+done

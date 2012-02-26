@@ -1,0 +1,12 @@
+#!/bin/bash
+# wksleep - Worker Sleep
+# Usage: wksleep ip_address ...
+
+# Sleep one or more workers.
+shared=/cygdrive/c/shared
+sleepfile=WORKER_SLEEP.txt
+for wkr in "$@"
+do
+  echo "Sweet dreams, $wkr!"
+  wkssh "$wkr -C touch $shared/$sleepfile && ls -l $shared | grep $sleepfile"
+done

@@ -1,0 +1,9 @@
+#!/bin/bash
+# wkgemlist - Worker Gem List
+# Usage: wkgemlist ip_address ...
+
+for wkr in "$@"
+do
+  # Run gem list --local on a worker
+  wkssh "$wkr -C gem.bat list --local"
+done

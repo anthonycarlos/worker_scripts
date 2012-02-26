@@ -1,0 +1,6 @@
+#!/bin/bash
+# wktaillog - Worker Tail Log
+# Usage: taillog ip_address
+
+# Tails the log of a worker.
+wkssh "$1 -C tail -f /cygdrive/c/shared/log/worker.log"

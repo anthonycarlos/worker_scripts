@@ -1,0 +1,3 @@
+#!/bin/bash
+# wkscp - Worker scp
+scp -i ~/.aws/brianl/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "$@"

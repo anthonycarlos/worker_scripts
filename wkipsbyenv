@@ -1,0 +1,11 @@
+#!/bin/bash
+# wkipsbyenv - Worker IPs by Env
+# Usage: wkipsbyenv env
+
+# Returns ip addresses of all workers from an environment.
+if [ -z "$1" ]
+then
+  echo 'Usage: wkipsbyenv env'
+  exit 2
+fi
+wkrdp -e $1 | awk '{print $5}'

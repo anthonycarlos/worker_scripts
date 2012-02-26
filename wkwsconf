@@ -1,0 +1,9 @@
+#!/bin/bash
+# wkwsconf - Worker WorkerService Config
+# Usage: wkwsconf ip_address ...
+
+for wkr in "$@"
+do
+  # Shows the WorkerService configuration file.
+  wkssh "$wkr -C cat /cygdrive/c/janova/JanovaWorkerService_1_4/JanovaWorkerService.exe.config"
+done

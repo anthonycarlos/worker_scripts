@@ -1,0 +1,13 @@
+#!/bin/bash
+# wksnaplog - Worker Snapshot Log
+# Usage: wksnaplog ip_address ...
+
+shared=/cygdrive/c/shared
+logdir=$shared/log
+logfile=worker.log
+
+for wkr in "$@"
+do
+  # Copies a snapshot of one or more worker logs.
+  wkscp $WORKER_USER@$wkr:$logdir/$logfile `date -j +%Y%m%d-%H%M%S--`$wkr.log
+done

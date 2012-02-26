@@ -1,0 +1,21 @@
+#!/bin/bash
+# wkgeminstall - Worker Gem Install
+# Usage: wkgeminstall gem_file ip_address ...
+# Install a janova-worker gem remotely on a worker.
+
+shared=/cygdrive/c/shared
+gemfilefullpath=$1
+gemfile=`basename "$1"`
+shift
+
+for wkr in "$@"
+do
+  # Copy the gem to the C:\shared directory on the worker.
+  wkscp $gemfilefullpath $WORKER_USER@$wkr:$shared && echo 'Copied gem to $wkr.'
+
+  # Install the gem.
+  wkssh "$wkr -C cd $shared && gem.bat install $gemfile"
+
+  # Remove the gem file.
+  wkssh "$wkr -C rm -f $shared/$gemfile && echo 'Removed gem from C:\shared from $wkr.'"
+done
