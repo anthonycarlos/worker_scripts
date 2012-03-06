@@ -1,1 +1,5 @@
 A collection of worker maintenance scripts.
+
+Environment Variables
+WORKER_USER - The username to use when logging into the remote worker.
+WORKER_PASSWORD - The user's password.
