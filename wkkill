@@ -5,7 +5,6 @@
 # Kill one or more workers and monitors (all jruby.exe processes).
 for wkr in "$@"
 do
-  #echo "Sweet dreams, $wkr!"
   wkssh "$wkr -C taskkill /F /IM jruby.exe /T"
 done
 
