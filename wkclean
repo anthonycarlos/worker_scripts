@@ -1,6 +1,6 @@
 #!/bin/bash
-# wkprep4ami - Worker Prep for AMI
-# Usage: wkprep4ami ip_address ...
+# wkclean - Worker Clean (formerly Worker Prep for AMI)
+# Usage: wkclean ip_address ...
 
 shared=/cygdrive/c/shared
 logdir=$shared/log
@@ -23,3 +23,4 @@ do
   # Remove any janova-worker gems from C:\shared.
   wkssh "$wkr -C rm -f $shared/janova-worker-*.gem && echo 'C:\shared cleared of janova-worker gems.'"
 done
+
