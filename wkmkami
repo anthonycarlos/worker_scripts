@@ -1,0 +1,30 @@
+#!/bin/bash
+# wkmkami - Worker Make AMI
+# Usage: wkmkami [-g gem_file] ip_address ...
+
+if [ "$1" == "-g" ]
+then
+  gemfile="$2"
+  shift
+  shift
+fi
+
+for wkr in "$@"
+do
+  # Stop the worker service.
+  wkwsstop $wkr
+  sleep 2
+
+  # Kill the worker and monitor.
+  wkkill $wkr
+
+  # Install a janova-worker gem.
+  if [ -n $gemfile ]
+  then
+    wkgeminstall $gemfile $wkr
+  fi
+
+  # Clean up.
+  wkclean $wkr
+done
+
